@@ -110,7 +110,7 @@ def instrument_view(form_id):
         f"### {escape(info['title'])}\n"
         f"**Status:** {escape(info['status'])}\n\n"
         f"{escape(info['purpose'])}\n\n"
-        f"**Reviewed XLSForm:** \`{escape(info['source_workbook'])}\`\n\n"
+        f"**Reviewed XLSForm:** {escape(info['source_workbook'])}\n\n"
         f"{groups}\n\n"
         + "\n".join(f"- Note: {escape(note)}" for note in info["notes"])
         + "\n\n*This is a form outline, not a data-entry or approval interface.*"
@@ -125,7 +125,7 @@ footer {display:none!important}
 def create_demo():
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     options = [(f["title"], f["id"]) for f in catalog["forms"]]
-    with gr.Blocks(title="SAEDtechApp | Four role prototype") as app:
+    with gr.Blocks(title="SAEDtechApp | Four role prototype", css=CUSTOM_CSS) as app:
         gr.Markdown("# SAEDtechApp — Education information, four views")
         gr.Markdown(
             "**DEMONSTRATION ONLY.** All school names, counts, submission statuses "
