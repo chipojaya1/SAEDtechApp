@@ -6,7 +6,7 @@
 
 ## 1. Why this work exists
 
-The goal is to make Doug's proposed education information workflow visible enough for local territorial leadership, schools and developers to discuss. A shared school identity could connect an approved register to two distinct Kobo instruments, after which each authorized level sees the information it needs.
+The goal is to make Doug's proposed education information workflow visible enough for local territorial leadership, schools and developers to discuss. The final DRC v2 XLSForms **already share an identical 615-school dropdown and the required `school_key`**, which can connect two distinct Kobo instruments after local approval, after which each authorized level sees the information it needs.
 
 The current visual app is a **static four-role mockup**; it provides layout and workflow ideas. It does not submit forms, sync offline data, authenticate users or query real schools.
 
@@ -15,14 +15,14 @@ The current visual app is a **static four-role mockup**; it provides layout and 
 | Deliverable | Evidence | Current status |
 |---|---|---|
 | Four-role interactive mockup | `index.html`, `styles.css`, `script.js` | Demonstration only; illustrative numbers |
-| School Assessment design | `SAWSO_School_Assessment_Master_v0.5_Handover.xlsx` held outside this public repo | Working 8-criterion XLSForm; not field-validated |
-| School Evaluation design | `SAWSO_VF_Combined_Sections_A_B_C_Overview.xlsx` held outside this public repo | 14-condition sample; not approved compliance instrument |
+| School Assessment design |  `SAWSO_School_Assessment.xlsx` held outside this public repo | Final v2 design (20261117a), eight required ratings, provisional weighted_total; field pilot pending |
+| School Evaluation design |  `SAWSO_School_Conditions.xlsx` held outside this public repo | Final v2 Conditions design (20261117a); 14 VF conditions, not approved compliance determination |
 | Form catalogue | `forms.html`, `data/form_catalog.json` | Read-only source-schema overview |
 | Colab quality-control notebook | `notebooks/SAEDtechApp_Colab_Form_Audit.ipynb` | Reads XLSForms, exports structural audit and field catalogue |
 | Colab Python app demo | `notebooks/SAEDtechApp_Colab_Python_App_Demo.ipynb` + `prototype/app.py` | Runs a Gradio role-view concept using only fictional school records |
 | Traceable decisions | `docs/DECISIONS_REQUIRED.md` | Open; requires local approval |
 
-The School Assessment has two repeatable inventories: a category-level equipment/furniture entry and an instructional-material entry. Individual desks are **not** expected to be entered one at a time. Reports and provisional 1–4 criterion ratings are separate from any future weighted/approved score.
+The School Assessment has two repeatable inventories: a category-level equipment/furniture entry and an instructional-material entry. Individual desks are **not** expected to be entered one at a time. The final Assessment now **calculates a provisional weighted_total out of 100** using 4,1,4,4,3,3,4,2. It is not an approved score and must not appear as an official national performance measure.
 
 ## 3. Roles and expected workflow (proposed, not approved)
 
@@ -39,11 +39,11 @@ Recommended initial entities (not a final database design):
 
 | Entity | Candidate key / fields | Key dependency |
 |---|---|---|
-| `School` | stable internal `school_id`, official name, level, province, relevant CONA/SECOPE identifiers | Approved master register; duplicate/missing ID resolution |
+| `School` | stable internal `school_key`, official name, level, province, relevant CONA/SECOPE identifiers | Approved master register; duplicate/missing ID resolution |
 | `Office` | `office_id`, office level and approved name | Country management hierarchy |
-| `SchoolOfficeAssignment` | `school_id`, `office_id`, validity period | School-to-office mapping and history |
+| `SchoolOfficeAssignment` | `school_key`, `office_id`, validity period | School-to-office mapping and history |
 | `SchoolAssessment` | `assessment_id`, `school_id`, assessment date, version, provisional criterion ratings | Approved questions, cadence, field pilot |
-| `SchoolEvaluation` | `evaluation_id`, `school_id`, assessment date, version, separate VF conditions | Approved country standards; safeguarding/access rules |
+| `SchoolConditions` | `evaluation_id`, `school_id`, assessment date, version, separate VF conditions | Approved country standards; safeguarding/access rules |
 | `SubmissionReview` | source form/record, submitter, reviewer, state, note, timestamps | Approval procedure and audit trail |
 
 Do not join solely on school name or assume CONA/SECOPE values are complete and unique. Do not merge the Assessment's provisional ratings and Evaluation's VF conditions into one invented metric.
@@ -68,7 +68,17 @@ The notebook does not make changes to source forms, authenticate with Kobo or wr
 
 The Python demo is separate from the read-only workbook audit. It does not receive data from the Kobo source forms.
 
-## 7. Minimum tests before field use
+## 7. Final v2 integration and migration notes
+
+Both files have version **20261117a** and retain their respective Kobo `id_string` values. They contain the *same* 615 school rows and 615 unique keys; officer names, contact details, school registers, test submissions and other potentially sensitive records must remain outside this public repo.
+
+**Handover blocker:** all school records presently calculate `managing_office = 'not_mapped'`. An approved mapping from school to managing office is necessary before launching the sub-provincial role view, permissions, deadlines or office-level aggregations.
+
+**Backward compatibility:** question names changed during v2 consolidation. Older test exports must be kept with their version and transformed through an explicit mapping; never simply append old CSVs beneath new ones. Kobo data for repeat groups is usually exported as separate child tables linked to a parent submission ID; aggregate parent records only once per school/reporting period.
+
+The Assessment's required ratings do not make the weighted score official. Scoring for fee-free schools (Criterion 7) and source 1–3 guidance within a 1–4 rating system remain open for SAWSO.
+
+## 8. Minimum tests before field use
 
 - Test both XLSForms in KoboToolbox (valid import, preview, save, submit and export).
 - Use realistic *fictional* cases for good, defective, unknown and incomplete school conditions.
@@ -79,7 +89,7 @@ The Python demo is separate from the read-only workbook audit. It does not recei
 - Reconcile the February 2024 assessment rubric before publishing any weighted score.
 - Test that no unauthorized role can access or rewrite restricted details; document audit logs and retention.
 
-## 8. Handover session agenda
+## 9. Handover session agenda
 
 **15–20 minutes suggested:**
 - 3 min: show why consistent school identities and reduced respondent burden matter.
@@ -88,7 +98,7 @@ The Python demo is separate from the read-only workbook audit. It does not recei
 - 5 min: review unresolved governance/data decisions.
 - 3 min: assign owners and agree on a small, consented country-led pilot.
 
-## 9. Explicit boundaries
+## 10. Explicit boundaries
 
 - No live school data is connected.
 - Sample figures in the dashboard are illustrative, not current national statistics.
@@ -97,13 +107,13 @@ The Python demo is separate from the read-only workbook audit. It does not recei
 - Deployment requires agreement by territorial leadership, school representatives and local implementers.
 - Never place identifiable children, safeguarding reports, personal contacts, passwords, private workbook exports or unapproved registries into this public repository.
 
-## 10. Immediate next owner actions
+## 11. Immediate next owner actions
 
 1. Designate an SAWSO programme owner and a local technical owner.
-2. Confirm whether this concept matches Doug's intended decision-making chain.
+2. Confirm whether this concept matches Doug's intended decision-making chain and mapping of each of the 615 schools to its managing office.
 3. Secure an approved school register and hierarchy map.
 4. Approve the two Kobo instruments separately and perform field tests.
 5. Decide privacy, access, review procedures, capacity and maintenance responsibilities.
 6. Only then commission an API/reporting integration and pilot rollout.
 
-See [ASSESSMENT_MAPPING.md](ASSESSMENT_MAPPING.md) and [DECISIONS_REQUIRED.md](DECISIONS_REQUIRED.md).
+See [FORM_V2_RELEASE_NOTES.md](FORM_V2_RELEASE_NOTES.md), [ASSESSMENT_MAPPING.md](ASSESSMENT_MAPPING.md) and [DECISIONS_REQUIRED.md](DECISIONS_REQUIRED.md).
