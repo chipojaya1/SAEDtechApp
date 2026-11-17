@@ -1,0 +1,47 @@
+"""SAEDtechApp static handover checks. Run: python tests/smoke_test.py"""
+import json
+import re
+from pathlib import Path
+import unittest
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class HandoverSmokeTests(unittest.TestCase):
+    def test_core_pages_exist(self):
+        for name in ("index.html", "forms.html", "script.js", "styles.css"):
+            self.assertTrue((ROOT / name).is_file(), name)
+
+    def test_dashboard_is_clearly_illustrative(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("Illustrative concept", html)
+        self.assertIn('href="forms.html"', html)
+        for role in ("school", "office", "provincial", "national"):
+            self.assertIn('id="view-' + role + '"', html)
+
+    def test_form_page_has_both_instruments(self):
+        html = (ROOT / "forms.html").read_text(encoding="utf-8")
+        self.assertIn('id="assessment"', html)
+        self.assertIn('id="evaluation"', html)
+        self.assertIn("SAMPLE / NOT APPROVED", html)
+
+    def test_schema_manifest_is_not_live_data(self):
+        data = json.loads((ROOT / "data/form_catalog.json").read_text(encoding="utf-8"))
+        self.assertEqual(data["metadata"]["data_status"], "schema-only")
+        ids = {form["id"] for form in data["forms"]}
+        self.assertEqual(ids, {"school_assessment", "school_evaluation"})
+        self.assertEqual(next(f for f in data["forms"] if f["id"] == "school_assessment")["structure"]["criteria"], 8)
+        self.assertEqual(next(f for f in data["forms"] if f["id"] == "school_evaluation")["structure"]["conditions"], 14)
+
+    def test_colab_notebook_is_valid_and_has_expected_workflow(self):
+        notebook = json.loads((ROOT / "notebooks/SAEDtechApp_Colab_Form_Audit.ipynb").read_text(encoding="utf-8"))
+        self.assertEqual(notebook["nbformat"], 4)
+        code = "\n".join("".join(c["source"]) for c in notebook["cells"] if c["cell_type"] == "code")
+        for text in ("files.upload()", "read_sheet(", "audit_xlsform(", "xlsform_audit.json", "form_field_catalog.csv"):
+            self.assertIn(text, code)
+        # Metadata-only workflow must not try to access private live Kobo APIs.
+        self.assertNotIn("kf.kobotoolbox.org/api", code)
+
+
+if __name__ == "__main__":
+    unittest.main()
