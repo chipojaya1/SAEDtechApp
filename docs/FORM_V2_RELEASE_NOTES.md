@@ -40,7 +40,7 @@ This public repository stores **no actual school list**, full form workbook or s
 3*c5_rating + 3*c6_rating + 4*c7_rating + 2*c8_rating
 ```
 
-Weights total **25**, so a 4/4 across all eight criteria would produce **100**. The formula is an implemented **draft method**, not an SAWSO-approved score or a measured performance percentage.
+Weights total **25**: a rating of 1 on every criterion produces **25**, and a rating of 4 on every criterion produces **100**. This is a **25–100 point provisional index, not a literal 0–100% performance percentage**. The formula is an implemented draft method, not an SAWSO-approved score.
 
 - `priority_support` allows no more than three selected categories or `none`; `priority_action` captures a follow-up.
 - `assessment_date` must not be in the future; year labels are derived from the date.
