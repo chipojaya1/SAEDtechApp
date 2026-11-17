@@ -1,29 +1,64 @@
 {
   "metadata": {
     "project": "SAEDtechApp",
-    "version": "handover-draft-2026-11-17",
+    "version": "drc-final-forms-v2-20261117a",
     "data_status": "schema-only",
     "dashboard_status": "illustrative-static-mockup",
     "last_review": "2026-11-17",
-    "notice": "Form structure is described for discussion. No live Kobo data, person-level data, submitted answers, or approved scoring are supplied."
+    "notice": "Schema descriptions verified against the two user-supplied 17 Nov 2026 XLSForms. No 615-school choice list, live Kobo submissions, personal data or approved scoring decisions are published.",
+    "source_assessment_version": "20261117a",
+    "source_conditions_version": "20261117a",
+    "shared_linkage": {
+      "school_field": "school_key",
+      "territory": "drc",
+      "hierarchy": [
+        "province",
+        "reg_level",
+        "school_key"
+      ],
+      "school_choice_count": 615,
+      "identical_choices_in_both": true,
+      "managing_office": "not_mapped for all 615 school choices",
+      "academic_year_start": "September",
+      "data_quality_review": true
+    }
   },
   "forms": [
     {
       "id": "school_assessment",
-      "title": "School Assessment",
-      "purpose": "Assess school conditions and resource needs using eight criteria.",
-      "source_workbook": "SAWSO_School_Assessment_Master_v0.5_Handover.xlsx",
-      "status": "Working prototype — not field approved",
+      "title": "School Assessment (DRC v2)",
+      "purpose": "Eight-criterion assessment of infrastructure, learning resources, enrolment, governance and school needs, linked by shared school_key.",
+      "source_workbook": "SAWSO_School_Assessment.xlsx",
+      "status": "Final DRC v2 design; Kobo validation reported, field pilot and scoring sign-off outstanding",
       "structure": {
         "criteria": 8,
-        "question_fields": 155,
+        "question_fields": 159,
         "provisional_rating_fields": 8,
-        "repeat_groups": 2
+        "repeat_groups": 2,
+        "ratings_required": true,
+        "weighted_total": {
+          "field": "weighted_total",
+          "formula": "4*c1 + 1*c2 + 4*c3 + 4*c4 + 3*c5 + 3*c6 + 4*c7 + 2*c8",
+          "weights": [
+            4,
+            1,
+            4,
+            4,
+            3,
+            3,
+            4,
+            2
+          ],
+          "maximum": 100,
+          "status": "provisional, unapproved"
+        }
       },
       "notes": [
-        "Includes condition and WASH counts, equipment and material repeat inventories, enrollment, governance, community involvement, school fees and external support.",
-        "Some required fields may create respondent burden; field testing is pending.",
-        "Do not publish weighted scores without approval of the underlying rubric."
+        "All eight 1–4 ratings required; written rationale required only for rating 1.",
+        "A provisional weighted_total is calculated out of 100 from the eight source weights; NOT an approved school performance percentage.",
+        "Adds priority_support (up to three areas or None) and priority_action for discussion of support needs.",
+        "A shared 615-school DRC list and school_key in both forms support eventual joins without spelling-based matching.",
+        "Fee-free-school scoring treatment and C3/C7 interpretation remain subject to SAWSO approval; C3/C7 source thresholds describe 1–3 while the overall form allows 1–4."
       ],
       "groups": [
         {
@@ -66,25 +101,29 @@
           "name": "8 · External support",
           "topic": "Community, government and private support"
         }
-      ]
+      ],
+      "form_id": "sawso_school_assessment_consolidated_master",
+      "form_version": "20261117a"
     },
     {
       "id": "school_evaluation",
-      "title": "School Evaluation",
-      "purpose": "Review the 14 VF conditions across governance/compliance, monitoring/protection and mission integration.",
-      "source_workbook": "SAWSO_VF_Combined_Sections_A_B_C_Overview.xlsx",
-      "status": "Sample / not approved — not a compliance determination",
+      "title": "School Conditions Questionnaire (DRC v2)",
+      "purpose": "Fourteen VF conditions across A–C with a shared school_key and reduced overlap with the School Assessment.",
+      "source_workbook": "SAWSO_School_Conditions.xlsx",
+      "status": "Final DRC v2 questionnaire design; local VF evidence, permissions and compliance decisions pending",
       "structure": {
         "sections": 3,
         "conditions": 14,
-        "question_fields": 112,
+        "question_fields": 95,
         "provisional_rating_fields": 0,
         "repeat_groups": 0
       },
       "notes": [
-        "The sample workbook itself explicitly says its responses do not establish compliance.",
-        "Wording, thresholds, evidence access, country adaptation and safeguard permissions require approval.",
-        "Do not combine its conditions with School Assessment ratings to invent an overall grade."
+        "Land use rights and school operating authorisation are captured as separate multi-select questions.",
+        "Conditions A2 reuses the separate assessment for common infrastructure/inventory evidence rather than asking officers twice.",
+        "A4 compensation notes appear when means or subsidy are insufficient; numerous open text answers were converted to tick-box lists.",
+        "Safeguarding responses must describe school procedures and systems, not incident-level or person-identifiable data.",
+        "A completed questionnaire does not constitute an approved compliance determination."
       ],
       "groups": [
         {
@@ -102,14 +141,17 @@
           "name": "C · Mission and faith integration",
           "topic": "Faith orientation, spiritual care, integration, families and vulnerable populations"
         }
-      ]
+      ],
+      "form_id": "sawso_vf_abc_combined_v01",
+      "form_version": "20261117a"
     }
   ],
   "decisions_pending": [
-    "Approved active-school register and school-to-managing-office map",
-    "User roles and record-level access controls",
-    "Assessment cadence, rubric, weighting and minimum evidence",
-    "Formal review/sign-off workflow and data-correction responsibilities",
-    "Country/territory terminology, privacy, safeguarding and local pilot agreement"
+    "Approval of active 615-school register and the school-to-managing-office assignment",
+    "Office roles, record access, correction and formal review/approval workflow",
+    "Approval of weighted score, fee-free C7 treatment, and interpretation of C3/C7 1–3 source anchors within a 1–4 form",
+    "Approval of VF conditions by territorial leadership and safeguarding/data-access policies",
+    "Kobo import + device pilot of these exact 20261117a files; old test records need version-aware mapping",
+    "Deployment architecture: secure Kobo exports, local ownership, backup and Power BI data model"
   ]
 }
