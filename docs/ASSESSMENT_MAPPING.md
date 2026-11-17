@@ -2,7 +2,7 @@
 
 ## Core distinction
 
-The **School Assessment** documents school conditions, needs and eight provisional ratings. The **School Evaluation** covers 14 VF conditions within three sections and is **not** itself an approved compliance decision. The two instruments should share a verified school key *only after* the local programme approves the registry and permissions. Keep separate record dates, versions, evidentiary standards and review states.
+The **School Assessment** documents school conditions, needs and eight provisional ratings. The **School Conditions Questionnaire** covers 14 VF conditions within three sections and is **not** itself an approved compliance decision. The two final DRC v2 forms already carry the identical 615-row school list and the required field `school_key`. The **live app still needs an approved registry, office hierarchy, review permissions and secure ingest before joining submissions**. Keep separate record dates, versions, evidentiary standards and review states.
 
 ## School Assessment: eight criteria
 
@@ -17,9 +17,9 @@ The **School Assessment** documents school conditions, needs and eight provision
 | 7. School fees | Fee policy and payment information | Contextual sustainability review | Household wealth, hardship or sanctions |
 | 8. External support | Assistance sources and observations | Planning and coordination | Complete verified funding dataset |
 
-All eight provisional ratings are **human assessor entries**; weighted rollups remain unapproved.
+All eight provisional ratings are **required human assessor entries** in v2. A computed `weighted_total` out of 100 is now present (weights 4,1,4,4,3,3,4,2), but the method remains unapproved for official reporting. The top-three `priority_support` choices and `priority_action` are candidate fields for follow-up views.
 
-## School Evaluation: 14 VF conditions
+## School Conditions Questionnaire: 14 VF conditions
 
 | Section | Covered areas | Intended role-level use |
 |---|---|---|
@@ -27,16 +27,16 @@ All eight provisional ratings are **human assessor entries**; weighted rollups r
 | B. Monitoring and Protection | THQ monitoring, trained personnel, child protection, effectiveness measurement, risk management | Restricted authorized workflow; do not surface sensitive case details on dashboards |
 | C. Mission and Faith Integration | Faith-based orientation, spiritual care, institutional integration, family proximity, vulnerable populations | Appropriate institution-level review with explicit access policies |
 
-The XLSForm is marked **SAMPLE / NOT APPROVED**. Do not label responses as approved compliance determinations or combine them mechanically with the eight Criterion 1–8 ratings.
+The v2 Conditions XLSForm is a final **questionnaire design**, not an approved VF compliance determination. Do not label responses as approved compliance determinations or combine them mechanically with the eight Criterion 1–8 ratings.
 
 ## One shared record, four views — data flow concept
 
 ```text
-Approved School Register (stable internal school ID)
+Approved DRC school register (shared school_key; 615 common choices in final v2)
        │
        ├── School Assessment (eight criteria; repeat inventories)
        │
-       └── School Evaluation (14 conditions; restricted review as needed)
+       └── School Conditions (14 VF conditions; restricted review as needed)
        │
    Submission provenance + version + authorized review trail
        │
@@ -53,3 +53,18 @@ Approved School Register (stable internal school ID)
 - Never describe a prototype's example numbers as current observations.
 - Do not publish exact information that can identify a child or safeguarding case.
 - Require documented approval for score weights, severity thresholds and access by role.
+
+## Exact join and reporting contract for developers
+
+| Dataset | Join field | Version/provenance | Implementation cautions |
+|---|---|---|---|
+| School register | `school_key` | Approved active school list | Exactly 615 identical choice rows in both submitted XLSForms; active roster must be confirmed by DRC |
+| School Assessment | `school_key` | form `sawso_school_assessment_consolidated_master`, version `20261117a` | Eight required ratings, provisional weighted_total, two repeat groups, priority_support |
+| School Conditions | `school_key` | form `sawso_vf_abc_combined_v01`, version `20261117a` | Fourteen VF conditions; land and operating documents separate; no compliance verdict |
+| School-to-office mapping | `school_key` + `managing_office` | Not yet provided | All 615 workbook rows currently return `not_mapped`; no real sub-provincial assignments possible |
+
+**Join at school + instrument submission granularity.** Multiple assessments, conditions submissions or equipment-repeat records can exist for one school. Do not combine two submission tables on `school_key` alone and then sum quantities; choose the approved period/version or aggregate each instrument separately first.
+
+Only authorized aggregate indicators and accepted data definitions should reach the provincial and national views. Keep assessor contact details and child protection narratives out of public visualizations.
+
+See [FORM_V2_RELEASE_NOTES.md](FORM_V2_RELEASE_NOTES.md) for exact form IDs, weights and migration rules.
