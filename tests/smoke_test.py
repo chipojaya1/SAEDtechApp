@@ -24,7 +24,9 @@ class HandoverSmokeTests(unittest.TestCase):
         html = (ROOT / "forms.html").read_text(encoding="utf-8")
         self.assertIn('id="assessment"', html)
         self.assertIn('id="evaluation"', html)
-        self.assertIn("SAMPLE / NOT APPROVED", html)
+        self.assertIn("approval pending", html)
+        self.assertIn("20261117a", html)
+        self.assertIn("615-school dropdown", html)
 
     def test_schema_manifest_is_not_live_data(self):
         data = json.loads((ROOT / "data/form_catalog.json").read_text(encoding="utf-8"))
