@@ -64,6 +64,15 @@ Run the lightweight static checks with:
 python tests/smoke_test.py
 ```
 
+## Run the Python demo locally (optional)
+
+```bash
+python -m pip install -r requirements-demo.txt
+python -m prototype.app
+```
+
+This launches a **fictional Gradio interface** on your local computer. It does not accept or store live school data, and it has no authentication.
+
 ## Colab: run the Python app demo
 
 1. Open the [Python app notebook](https://colab.research.google.com/github/chipojaya1/SAEDtechApp/blob/main/notebooks/SAEDtechApp_Colab_Python_App_Demo.ipynb).
