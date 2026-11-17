@@ -637,3 +637,12 @@ table.data-table {
   .app-header, .topbar, .page { padding-left: 18px; padding-right: 18px; }
   .stat-grid { grid-template-columns: 1fr 1fr; }
 }
+
+
+/* Handover-safe prototype framing */
+.app-header__resource-link{padding:0 0 16px}
+.app-header__resource-link a{display:inline-block;color:#fff;background:#1B4F8A;border:1px solid #7FA6CA;border-radius:6px;padding:10px 14px;text-decoration:none;font-size:13px;font-weight:700}
+.app-header__resource-link a:hover{background:#2867A3}
+.demo-notice{background:#FFF7E6;color:#5C4218;border-left:5px solid #BD862C;padding:15px clamp(18px,3vw,32px);line-height:1.5;font-size:13px}
+.demo-notice a{color:#6D470D;text-decoration:underline;font-weight:700}
+.level-nav__tab:focus-visible,.app-header__resource-link a:focus-visible,.demo-notice a:focus-visible{outline:3px solid #F2A747;outline-offset:3px}

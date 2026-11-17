@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "project": "SAEDtechApp",
+    "version": "handover-draft-2026-11-17",
+    "data_status": "schema-only",
+    "dashboard_status": "illustrative-static-mockup",
+    "last_review": "2026-11-17",
+    "notice": "Form structure is described for discussion. No live Kobo data, person-level data, submitted answers, or approved scoring are supplied."
+  },
+  "forms": [
+    {
+      "id": "school_assessment",
+      "title": "School Assessment",
+      "purpose": "Assess school conditions and resource needs using eight criteria.",
+      "source_workbook": "SAWSO_School_Assessment_Master_v0.5_Handover.xlsx",
+      "status": "Working prototype — not field approved",
+      "structure": {
+        "criteria": 8,
+        "question_fields": 155,
+        "provisional_rating_fields": 8,
+        "repeat_groups": 2
+      },
+      "notes": [
+        "Includes condition and WASH counts, equipment and material repeat inventories, enrollment, governance, community involvement, school fees and external support.",
+        "Some required fields may create respondent burden; field testing is pending.",
+        "Do not publish weighted scores without approval of the underlying rubric."
+      ],
+      "groups": [
+        {
+          "id": "c1",
+          "name": "1 · Infrastructure",
+          "topic": "Classrooms, structural condition, WASH"
+        },
+        {
+          "id": "c2",
+          "name": "2 · Equipment and materials",
+          "topic": "Furniture condition and teaching materials"
+        },
+        {
+          "id": "c3",
+          "name": "3 · Enrolment and capacity",
+          "topic": "Attendance, school capacity and trends"
+        },
+        {
+          "id": "c4",
+          "name": "4 · Access and alternatives",
+          "topic": "Nearby schools and relative access"
+        },
+        {
+          "id": "c5",
+          "name": "5 · Governance",
+          "topic": "Roles, responsibilities, records"
+        },
+        {
+          "id": "c6",
+          "name": "6 · Community involvement",
+          "topic": "School committees and participation"
+        },
+        {
+          "id": "c7",
+          "name": "7 · School fees",
+          "topic": "Payment consistency and fee policies"
+        },
+        {
+          "id": "c8",
+          "name": "8 · External support",
+          "topic": "Community, government and private support"
+        }
+      ]
+    },
+    {
+      "id": "school_evaluation",
+      "title": "School Evaluation",
+      "purpose": "Review the 14 VF conditions across governance/compliance, monitoring/protection and mission integration.",
+      "source_workbook": "SAWSO_VF_Combined_Sections_A_B_C_Overview.xlsx",
+      "status": "Sample / not approved — not a compliance determination",
+      "structure": {
+        "sections": 3,
+        "conditions": 14,
+        "question_fields": 112,
+        "provisional_rating_fields": 0,
+        "repeat_groups": 0
+      },
+      "notes": [
+        "The sample workbook itself explicitly says its responses do not establish compliance.",
+        "Wording, thresholds, evidence access, country adaptation and safeguard permissions require approval.",
+        "Do not combine its conditions with School Assessment ratings to invent an overall grade."
+      ],
+      "groups": [
+        {
+          "id": "a",
+          "name": "A · Governance and compliance",
+          "topic": "Legal registration, standards, governance, financial stability"
+        },
+        {
+          "id": "b",
+          "name": "B · Monitoring and protection",
+          "topic": "THQ monitoring, trained personnel, child protection, effectiveness, risk"
+        },
+        {
+          "id": "c",
+          "name": "C · Mission and faith integration",
+          "topic": "Faith orientation, spiritual care, integration, families and vulnerable populations"
+        }
+      ]
+    }
+  ],
+  "decisions_pending": [
+    "Approved active-school register and school-to-managing-office map",
+    "User roles and record-level access controls",
+    "Assessment cadence, rubric, weighting and minimum evidence",
+    "Formal review/sign-off workflow and data-correction responsibilities",
+    "Country/territory terminology, privacy, safeguarding and local pilot agreement"
+  ]
+}

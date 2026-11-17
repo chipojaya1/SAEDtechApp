@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assessment and Evaluation | SAEDtechApp</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+:root{--brand:#10243a;--accent:#1b4f8a;--surface:#f7fafc;--line:#dbe3ea}
+html{scroll-behavior:smooth}body{font-family:"Public Sans",system-ui,sans-serif;color:var(--brand)}
+.site-head{background:var(--brand);color:#fff;padding:22px clamp(20px,5vw,72px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.site-head strong{font-size:1.2rem}.site-head nav{display:flex;gap:10px;flex-wrap:wrap}
+.site-head a{color:#fff;text-decoration:none;font-weight:600;padding:9px 13px;border-radius:7px;border:1px solid #ffffff55}
+.site-head a:hover{background:#ffffff1c}.hero{background:#eaf2f8;padding:55px clamp(20px,5vw,72px) 46px}.hero .kicker{font-size:.8rem;letter-spacing:.13em;font-weight:800;text-transform:uppercase;color:#335c7e}
+.hero h1{font-size:clamp(2.1rem,4.7vw,4.3rem);line-height:1.09;letter-spacing:-.035em;max-width:940px;margin:12px 0 18px}
+.hero p{font-size:1.08rem;max-width:810px;line-height:1.6;margin:0;color:#344f63}
+.notice{background:#fff7e5;border-left:5px solid #ab6f15;border-radius:0 9px 9px 0;padding:14px 18px;margin-top:26px;max-width:920px;color:#543b11}
+.wrapper{max-width:1350px;margin:0 auto;padding:34px clamp(20px,4vw,60px) 76px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:0 8px 30px #12314b0e;padding:28px;overflow:hidden}
+.eyebrow{color:#1b4f8a;font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.79rem}
+.card h2{font-size:2rem;letter-spacing:-.03em;margin:12px 0}.card p{line-height:1.57;color:#3c5369}.pill{display:inline-block;background:#fff4db;color:#805815;border:1px solid #f0d99c;font-size:.83rem;border-radius:99px;padding:6px 12px;font-weight:700}
+.metrics{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.metric{background:var(--surface);border:1px solid var(--line);padding:13px 16px;border-radius:8px;flex:1;min-width:100px}.metric strong{display:block;font-size:1.75rem}.metric span{font-size:.8rem;color:#4b6475}
+.card details{border-top:1px solid var(--line);padding:13px 0}.card details:last-of-type{border-bottom:1px solid var(--line)}
+.card summary{cursor:pointer;font-weight:750;line-height:1.4}.card details p{font-size:.9rem;margin:9px 0 3px;padding-left:14px}
+.links{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}.action{display:inline-block;background:#1b4f8a;color:#fff!important;text-decoration:none;padding:12px 15px;font-weight:800;border-radius:8px}.action.secondary{background:#e6edf4;color:#17334e!important}
+.flow{margin-top:30px;padding:26px;border:1px solid var(--line);border-radius:15px;background:#fff}.flow h2{margin:0 0 17px;font-size:1.5rem}.stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.stage{background:var(--surface);padding:18px;border-radius:9px;border:1px solid var(--line)}.stage strong{display:block;margin-bottom:8px;color:#154c7a}.stage p{margin:0;font-size:.89rem;line-height:1.48;color:#466072}.stage em{font-size:.78rem;color:#946616;font-style:normal;font-weight:700}
+.footer{padding:24px clamp(20px,5vw,72px);background:var(--brand);color:#cee0ec;font-size:.9rem}
+a:focus-visible,summary:focus-visible{outline:3px solid #f4ae56;outline-offset:3px}
+@media(max-width:850px){.cards,.stages{grid-template-columns:1fr}.hero{padding-top:35px}.card{padding:20px}}
+</style>
+</head><body>
+<header class="site-head"><strong>SAEDtechApp · School information, made useful</strong><nav aria-label="Site navigation"><a href="index.html">Four-role dashboard</a><a href="forms.html" aria-current="page">Forms & handover</a><a href="https://github.com/chipojaya1/SAEDtechApp" target="_blank" rel="noopener">Source on GitHub</a></nav></header>
+<section class="hero"><span class="kicker">Two instruments · One shared school identity</span>
+<h1>Collect the right evidence.<br>Show the right information.</h1>
+<p>The School Assessment and School Evaluation serve related but different purposes. They must remain separate in collection and interpretation, while approved school identifiers may help link their results in a future reporting system.</p>
+<div class="notice"><strong>Prototype status.</strong> Both forms are working drafts. This page contains their design summaries, not a submission portal. No live KoboToolbox records, approvals, assessment results, or compliance decisions are shown here.</div></section>
+<main class="wrapper">
+<section class="cards" aria-label="Available form designs">
+<article class="card" id="assessment"><div class="eyebrow">Form 01 · School conditions</div><h2>School Assessment</h2><span class="pill">Working prototype · field testing pending</span>
+<p>Eight source-defined criteria. Captures infrastructure, capacity and the resources schools need, with provisional 1–4 ratings that are <strong>not</strong> an approved weighted score.</p>
+<div class="metrics"><div class="metric"><strong>8</strong><span>criteria</span></div><div class="metric"><strong>2</strong><span>inventory repeats</span></div><div class="metric"><strong>155</strong><span>possible response fields*</span></div></div>
+<details><summary>1 · Infrastructure and WASH</summary><p>Classrooms and condition; sanitation, handwashing and drinking water</p></details>
+<details><summary>2 · Equipment, furniture and teaching materials</summary><p>One inventory entry per category or title, not per physical item; includes quantity and condition checks</p></details>
+<details><summary>3 · Enrolment and capacity</summary><p>Enrollment, attendance and available school capacity</p></details>
+<details><summary>4 · Competitiveness and access</summary><p>Alternative schools, walking time and school-choice context</p></details>
+<details><summary>5 · Governance and administration</summary><p>School management roles and records</p></details>
+<details><summary>6 · Community involvement</summary><p>School committees and parent participation</p></details>
+<details><summary>7 · Fee payment</summary><p>Fee policy, payment patterns and supporting evidence</p></details>
+<details><summary>8 · External support</summary><p>Government, community, private and other support</p></details>
+<p style="font-size:.83rem">*The count describes potential XLSForm response fields; skip logic means an assessor will not see every question.</p>
+</article>
+<article class="card" id="evaluation"><div class="eyebrow">Form 02 · Institutional evaluation</div><h2>School Evaluation</h2><span class="pill">SAMPLE / NOT APPROVED</span>
+<p>Fourteen VF conditions across three sections. This sample is for structured discussion and review; <strong>answers do not establish compliance.</strong></p>
+<div class="metrics"><div class="metric"><strong>14</strong><span>conditions</span></div><div class="metric"><strong>3</strong><span>sections</span></div><div class="metric"><strong>112</strong><span>possible response fields*</span></div></div>
+<details><summary>A · Governance and compliance</summary><p>Legal registration, minimum standards, governance structure and financial stability</p></details>
+<details><summary>B · Monitoring and protection</summary><p>THQ monitoring, personnel training, child protection, effectiveness measurement and risk management</p></details>
+<details><summary>C · Mission and faith integration</summary><p>Faith-based orientation, spiritual care, integration, family proximity and vulnerable populations</p></details>
+<p style="font-size:.9rem">Evidence availability, local terminology, safeguarding permissions and assessment thresholds need formal review before field use.</p>
+</article>
+</section>
+<section class="flow"><h2>How these could fit into one future system</h2><div class="stages">
+<div class="stage"><strong>1. School</strong><p>A verified school identifier anchors register, assessment and evaluation submissions.</p><em>Requires approved registry</em></div>
+<div class="stage"><strong>2. Sub-provincial</strong><p>Authorized officers review completeness, request corrections and retain audit history.</p><em>Workflow not yet approved</em></div>
+<div class="stage"><strong>3. Provincial</strong><p>See patterns, coverage and flagged needs, with traceable underlying data.</p><em>Mapping/definitions pending</em></div>
+<div class="stage"><strong>4. National</strong><p>Compare coverage and support priorities without exposing restricted answers.</p><em>Access controls pending</em></div>
+</div>
+<div class="links"><a class="action" href="index.html">Explore the four-role dashboard</a><a class="action secondary" href="https://colab.research.google.com/github/chipojaya1/SAEDtechApp/blob/main/notebooks/SAEDtechApp_Colab_Form_Audit.ipynb" target="_blank" rel="noopener">Colab audit notebook (after merge)</a><a class="action secondary" href="https://github.com/chipojaya1/SAEDtechApp/blob/main/docs/HANDOVER.md" target="_blank" rel="noopener">Handover guide (after merge)</a></div>
+</section>
+</main>
+<footer class="footer">SAWSO education data system · Concept illustration only · No live school submissions are displayed. <a href="https://github.com/chipojaya1/SAEDtechApp" style="color:#fff">GitHub repository</a></footer>
+</body></html>
