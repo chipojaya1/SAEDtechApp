@@ -6,7 +6,8 @@
 
 - **Dashboard:** open [index.html](index.html) in a browser, then explore the School, Sub-provincial, Provincial and National tabs.
 - **Two-form overview:** open [forms.html](forms.html).
-- **Google Colab:** [Open the XLSForm audit notebook](https://colab.research.google.com/github/chipojaya1/SAEDtechApp/blob/main/notebooks/SAEDtechApp_Colab_Form_Audit.ipynb) (after the changes are merged to `main`).
+- **Google Colab — Python app:** [Run the four-role Gradio demonstration](https://colab.research.google.com/github/chipojaya1/SAEDtechApp/blob/main/notebooks/SAEDtechApp_Colab_Python_App_Demo.ipynb) with fictional records only.
+- **Google Colab — form audit:** [Run the XLSForm audit notebook](https://colab.research.google.com/github/chipojaya1/SAEDtechApp/blob/main/notebooks/SAEDtechApp_Colab_Form_Audit.ipynb) to inspect two private workbooks without publishing them.
 - **Handover:** [docs/HANDOVER.md](docs/HANDOVER.md).
 - **Form-to-dashboard mapping:** [docs/ASSESSMENT_MAPPING.md](docs/ASSESSMENT_MAPPING.md).
 - **Project decisions still required:** [docs/DECISIONS_REQUIRED.md](docs/DECISIONS_REQUIRED.md).
@@ -16,6 +17,7 @@
 | Component | Current state | What it does |
 |---|---|---|
 | Four-role dashboard | Static demonstration | Shows a possible division of information and responsibilities by role |
+| Python/Gradio demo | Fictional data only | Runnable four-role prototype with an interactive school selector, office filter and read-only two-form overview |
 | School Assessment | Separate working XLSForm, **not hosted in this public repository** | Eight criteria, including infrastructure/WASH, inventories, enrollment, access, governance, community, fees and external support |
 | School Evaluation | Separate sample XLSForm, **not hosted in this public repository** | Fourteen VF conditions across Sections A–C; **not an approved compliance decision** |
 | [Forms catalogue](forms.html) | Static reference | Explains form purposes and responsibilities without exposing school responses |
@@ -38,6 +40,8 @@ script.js
 forms.html                                # instruments and proposed workflow
 data/form_catalog.json                   # metadata only; no actual submissions
 notebooks/SAEDtechApp_Colab_Form_Audit.ipynb
+notebooks/SAEDtechApp_Colab_Python_App_Demo.ipynb
+prototype/app.py                          # Gradio demo; synthetic schools only
 docs/HANDOVER.md
 docs/ASSESSMENT_MAPPING.md
 docs/DECISIONS_REQUIRED.md
@@ -59,6 +63,15 @@ Run the lightweight static checks with:
 ```bash
 python tests/smoke_test.py
 ```
+
+## Colab: run the Python app demo
+
+1. Open the [Python app notebook](https://colab.research.google.com/github/chipojaya1/SAEDtechApp/blob/main/notebooks/SAEDtechApp_Colab_Python_App_Demo.ipynb).
+2. Run all cells to install Gradio, fetch this public repository and launch the demo.
+3. Select fictional schools and switch between School, Sub-provincial, Provincial, National and the two-form overview.
+4. The temporary Gradio sharing link is public to people with the URL, so **never add confidential workbooks or real learner data** to this demo.
+
+The Gradio app uses fictional records and displays **no actual Kobo submissions**, regardless of whether the other notebook has inspected your form files.
 
 ## Colab: update the form audit
 
