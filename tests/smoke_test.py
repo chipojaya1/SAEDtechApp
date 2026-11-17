@@ -1,5 +1,6 @@
 """SAEDtechApp static handover checks. Run: python tests/smoke_test.py"""
 import json
+import ast
 import re
 from pathlib import Path
 import unittest
@@ -32,6 +33,17 @@ class HandoverSmokeTests(unittest.TestCase):
         self.assertEqual(ids, {"school_assessment", "school_evaluation"})
         self.assertEqual(next(f for f in data["forms"] if f["id"] == "school_assessment")["structure"]["criteria"], 8)
         self.assertEqual(next(f for f in data["forms"] if f["id"] == "school_evaluation")["structure"]["conditions"], 14)
+
+    def test_python_demo_is_parseable_without_gradio_installed(self):
+        source = (ROOT / "prototype/app.py").read_text(encoding="utf-8")
+        ast.parse(source)
+        self.assertIn("DEMO_SCHOOLS", source)
+        self.assertIn("create_demo", source)
+        self.assertIn("fictional", source.lower())
+        notebook = json.loads((ROOT / "notebooks/SAEDtechApp_Colab_Python_App_Demo.ipynb").read_text(encoding="utf-8"))
+        self.assertEqual(notebook["nbformat"], 4)
+        combined = "\\n".join("".join(c["source"]) for c in notebook["cells"] if c["cell_type"] == "code")
+        self.assertIn("create_demo", combined)
 
     def test_colab_notebook_is_valid_and_has_expected_workflow(self):
         notebook = json.loads((ROOT / "notebooks/SAEDtechApp_Colab_Form_Audit.ipynb").read_text(encoding="utf-8"))

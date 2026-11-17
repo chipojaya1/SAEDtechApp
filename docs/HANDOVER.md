@@ -19,6 +19,7 @@ The current visual app is a **static four-role mockup**; it provides layout and 
 | School Evaluation design | `SAWSO_VF_Combined_Sections_A_B_C_Overview.xlsx` held outside this public repo | 14-condition sample; not approved compliance instrument |
 | Form catalogue | `forms.html`, `data/form_catalog.json` | Read-only source-schema overview |
 | Colab quality-control notebook | `notebooks/SAEDtechApp_Colab_Form_Audit.ipynb` | Reads XLSForms, exports structural audit and field catalogue |
+| Colab Python app demo | `notebooks/SAEDtechApp_Colab_Python_App_Demo.ipynb` + `prototype/app.py` | Runs a Gradio role-view concept using only fictional school records |
 | Traceable decisions | `docs/DECISIONS_REQUIRED.md` | Open; requires local approval |
 
 The School Assessment has two repeatable inventories: a category-level equipment/furniture entry and an instructional-material entry. Individual desks are **not** expected to be entered one at a time. Reports and provisional 1–4 criterion ratings are separate from any future weighted/approved score.
@@ -58,7 +59,16 @@ Do not join solely on school name or assume CONA/SECOPE values are complete and 
 
 The notebook does not make changes to source forms, authenticate with Kobo or write to this repository.
 
-## 6. Minimum tests before field use
+## 6. Run the optional Python app demonstration
+
+1. Open `notebooks/SAEDtechApp_Colab_Python_App_Demo.ipynb` in Google Colab.
+2. Run all cells. The notebook installs Gradio, clones the public repository, and launches a demonstration link.
+3. Navigate the School, Sub-provincial, Provincial, National, and Forms tabs. The sample records are deliberately fictional.
+4. Treat the temporary Gradio link as shareable/public to anyone who has it. **Never upload confidential data to this demo**.
+
+The Python demo is separate from the read-only workbook audit. It does not receive data from the Kobo source forms.
+
+## 7. Minimum tests before field use
 
 - Test both XLSForms in KoboToolbox (valid import, preview, save, submit and export).
 - Use realistic *fictional* cases for good, defective, unknown and incomplete school conditions.
@@ -69,7 +79,7 @@ The notebook does not make changes to source forms, authenticate with Kobo or wr
 - Reconcile the February 2024 assessment rubric before publishing any weighted score.
 - Test that no unauthorized role can access or rewrite restricted details; document audit logs and retention.
 
-## 7. Handover session agenda
+## 8. Handover session agenda
 
 **15–20 minutes suggested:**
 - 3 min: show why consistent school identities and reduced respondent burden matter.
@@ -78,7 +88,7 @@ The notebook does not make changes to source forms, authenticate with Kobo or wr
 - 5 min: review unresolved governance/data decisions.
 - 3 min: assign owners and agree on a small, consented country-led pilot.
 
-## 8. Explicit boundaries
+## 9. Explicit boundaries
 
 - No live school data is connected.
 - Sample figures in the dashboard are illustrative, not current national statistics.
@@ -87,7 +97,7 @@ The notebook does not make changes to source forms, authenticate with Kobo or wr
 - Deployment requires agreement by territorial leadership, school representatives and local implementers.
 - Never place identifiable children, safeguarding reports, personal contacts, passwords, private workbook exports or unapproved registries into this public repository.
 
-## 9. Immediate next owner actions
+## 10. Immediate next owner actions
 
 1. Designate an SAWSO programme owner and a local technical owner.
 2. Confirm whether this concept matches Doug's intended decision-making chain.
