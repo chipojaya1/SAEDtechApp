@@ -1,0 +1,29 @@
+# Do not commit source registries, Kobo XLSForms, or Kobo submissions to a public demo.
+*.xlsx
+*.xls
+*.ods
+*submissions*.csv
+*submissions*.json
+data/private/
+data/raw/
+private/
+exports/
+outputs/
+saedtech_handover/
+SAEDtechApp_Colab_Handover.zip
+
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+*token*.txt
+*credentials*.json
+*.pem
+*.key
+
+# Python/Colab temporary files
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
