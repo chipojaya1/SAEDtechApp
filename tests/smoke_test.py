@@ -24,7 +24,9 @@ class HandoverSmokeTests(unittest.TestCase):
         html = (ROOT / "forms.html").read_text(encoding="utf-8")
         self.assertIn('id="assessment"', html)
         self.assertIn('id="evaluation"', html)
-        self.assertIn("SAMPLE / NOT APPROVED", html)
+        self.assertIn("approval pending", html)
+        self.assertIn("20261117a", html)
+        self.assertIn("615-school dropdown", html)
 
     def test_schema_manifest_is_not_live_data(self):
         data = json.loads((ROOT / "data/form_catalog.json").read_text(encoding="utf-8"))
@@ -33,6 +35,26 @@ class HandoverSmokeTests(unittest.TestCase):
         self.assertEqual(ids, {"school_assessment", "school_evaluation"})
         self.assertEqual(next(f for f in data["forms"] if f["id"] == "school_assessment")["structure"]["criteria"], 8)
         self.assertEqual(next(f for f in data["forms"] if f["id"] == "school_evaluation")["structure"]["conditions"], 14)
+
+    def test_final_drc_v2_form_contract(self):
+        manifest = json.loads((ROOT / "data/form_catalog.json").read_text(encoding="utf-8"))
+        shared = manifest["metadata"]["shared_linkage"]
+        self.assertEqual(shared["school_field"], "school_key")
+        self.assertTrue(shared["identical_choices_in_both"])
+        self.assertEqual(shared["school_choice_count"], 615)
+        self.assertIn("not_mapped", shared["managing_office"])
+
+        assessment = next(f for f in manifest["forms"] if f["id"] == "school_assessment")
+        conditions = next(f for f in manifest["forms"] if f["id"] == "school_evaluation")
+        self.assertEqual(assessment["form_id"], "sawso_school_assessment_consolidated_master")
+        self.assertEqual(conditions["form_id"], "sawso_vf_abc_combined_v01")
+        self.assertEqual(assessment["form_version"], "20261117a")
+        self.assertEqual(conditions["form_version"], "20261117a")
+        self.assertEqual(assessment["structure"]["question_fields"], 159)
+        self.assertEqual(conditions["structure"]["question_fields"], 95)
+        self.assertEqual(assessment["structure"]["weighted_total"]["maximum"], 100)
+        self.assertEqual(sum(assessment["structure"]["weighted_total"]["weights"]), 25)
+        self.assertIn("provisional", assessment["structure"]["weighted_total"]["status"])
 
     def test_python_demo_is_parseable_without_gradio_installed(self):
         source = (ROOT / "prototype/app.py").read_text(encoding="utf-8")
